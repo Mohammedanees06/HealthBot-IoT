@@ -4,26 +4,18 @@ An all-in-one intelligent health monitoring system that captures real-time senso
  Key Features:
  
 📊 Sensor Integration: Collects health parameters like temperature and pulse using IoT sensors.
-
 💬 AI Chatbot: Offers assistance, suggestions, and answers to common health-related queries.
-
 🧾 Health Reports: Automatically generates health reports based on live and historical data.
-
 🤒 Symptom Checker: Helps users identify potential health conditions by analyzing reported symptoms.
-
 💊 Medicine Info: Provides detailed information and uses of common medications.
-
 🥗 Nutrition Tips: Suggests diet plans and nutrition advice tailored to user needs.
-
 🧠 Mental Health Support: Includes stress management tips and basic mental well-being resources.
-
 📅 Appointment Booking: Allows users to schedule health checkups or consultations.
 
 Technologies Used:
 Frontend: HTML, CSS, JavaScript
 
 Backend: Node.js
-
 Database & Auth: Firebase
 
 Hardware: IoT sensors with ESP8266 (for temperature and pulse monitoring)
