@@ -29,9 +29,13 @@ Database & Auth: Firebase
 Hardware: IoT sensors with ESP8266 (for temperature and pulse monitoring)
 
 ![image](https://github.com/user-attachments/assets/3731170f-4a75-482f-8d8a-8c585722ac90)
+
 ![image](https://github.com/user-attachments/assets/330a7458-f337-41df-aefd-3469fb7192c2)
+
 ![image](https://github.com/user-attachments/assets/070103bf-e754-4afc-8047-9c335036add0)
-![image](https://github.com/user-attachments/assets/eac8b478-b17b-45e5-9e2e-ae71cc9487b0)
+
+![image](https://github.com/user-attachments/assets/81b125a8-d36b-4976-ba2a-62379b97bfa7)
+
 ![image](https://github.com/user-attachments/assets/c29282a0-3fc3-4a27-837a-4b03f20ac668)
 
 
