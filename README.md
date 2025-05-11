@@ -32,7 +32,8 @@ Hardware: IoT sensors with ESP8266 (for temperature and pulse monitoring)
 ![image](https://github.com/user-attachments/assets/330a7458-f337-41df-aefd-3469fb7192c2)
 ![image](https://github.com/user-attachments/assets/070103bf-e754-4afc-8047-9c335036add0)
 ![image](https://github.com/user-attachments/assets/eac8b478-b17b-45e5-9e2e-ae71cc9487b0)
-![image](https://github.com/user-attachments/assets/9c9119de-c9e5-4a73-be7f-0f4ea9908c7f)
+![image](https://github.com/user-attachments/assets/c29282a0-3fc3-4a27-837a-4b03f20ac668)
+
 
 
 Code will be added shortly. For any inquiries, feel free to email me at mohammedanees0606@gmail.com.
