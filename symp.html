@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Symptom Checker</title>
+    <link rel="stylesheet" href="symp.css">
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='index.html'">&#8592; Back</button>
+    <div class="container">
+        <h1>Advanced Symptom Checker</h1>
+        <div class="symptom-input">
+            <h2>Enter Your Symptoms</h2>
+            <div class="input-group">
+                <input type="text" id="symptomInput" placeholder="Enter a symptom (e.g., fever, headache)">
+                <button onclick="addSymptom()">Add Symptom</button>
+            </div>
+            <div id="symptomList" class="symptom-list"></div>
+            <button type="button" id="checkButton" class="check-button" disabled>Check Symptoms</button>
+        </div>
+        <div id="results" class="results"></div>
+    </div>
+    <script src="symp.js"></script>
+</body>
+</html> 

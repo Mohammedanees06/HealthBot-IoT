@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthcare Chatbot</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="chaticon.png" type="image/png" />
+  </head>
+  <body>
+      
+    <!-- Navbar -->
+     
+   <nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="chat.html">Chat</a></li>
+    <li><a href="meal.html">Meal</a></li>
+    <li><a href="nutrition.html">Nutrition</a></li>
+    <li><a href="medic.html">Medicine</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropbtn">More</a>
+      <div class="dropdown-content">
+        <a href="symp.html">Symptom Checker</a>
+        <a href="medico.html">Medication</a>
+        <a href="mentalhealth.html">Mental Health</a>
+        <a href="appoi.html">Appointment</a>
+        <a href="doctor.html">My Reports</a>
+        <a id="symptomLink" href="https://my.docus.ai/dashboard/chat/personal/9350f77f-6497-4c51-9f0d-eb1510f05f48">AI Symptom</a>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Add this logout button here -->
+  <div class="logout-container">
+    <button onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <header>
+        <h1>HealthBot</h1>
+        <h3>Your Smart Digital Healthcare assistant</h3>
+      </header>
+    </div>
+    <div id="middle">
+      <h2>Your Smart Digital Healthcare Assistant</h2>
+      <p>Monitor health, track nutrition, and get personalized meal plans.</p>
+      <p>Set medication reminders and access detailed medicine info.</p>
+      <p>Book doctor appointments and check symptoms instantly.</p>
+      <p>Explore mental health support and wellness tips.</p>
+      <p>Stay connected with your healthcare team and family.</p>
+      <button class="chat-btn" onclick="window.location.href='chat.html'">Chat Now</button>
+    </div>
+   
+    </div>
+    <script>
+    // If user is not logged in, redirect to login page
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn"); // Clear session
+      window.location.href = "login.html";   // Redirect to login
+    }
+  </script>
+  </body>
+</html>

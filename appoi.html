@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Scheduling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            transition: background-color 0.5s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #000;
+            margin-bottom: 30px;
+            transition: color 0.3s ease;
+            font-size: 2.2rem;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: calc(100% - 140px);
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: #000;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus {
+            border-color: #000;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #111;
+            transform: scale(0.95);
+        }
+
+        #appointments {
+            margin-top: 40px;
+            padding: 25px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.8;
+            transition: border-color 0.3s ease, background-color 0.5s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        #appointments h3 {
+            color: #000;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        #appointments ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #appointments li {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #appointments li:hover {
+            background-color: #eee;
+            transform: translateY(-2px);
+        }
+
+        #appointments li span {
+            font-weight: bold;
+            color: #000;
+            margin-right: 10px;
+        }
+
+        #appointments .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        #appointments button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 0;
+        }
+
+        #appointments button.cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #appointments button.cancel:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            input[type="text"], input[type="date"] {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+
+            #appointments {
+                margin-top: 30px;
+                padding: 20px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            #appointments li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            #appointments .actions{
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        body.dark-mode {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body.dark-mode .container {
+            background-color: #1f1f1f;
+            border-color: #444;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode h2 {
+            color: #fff;
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="date"] {
+            background-color: #2a2a2a;
+            border-color: #555;
+            color: #eee;
+        }
+
+        body.dark-mode input[type="text"]:focus,
+        body.dark-mode input[type="date"]:focus {
+            border-color: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        body.dark-mode button {
+            background-color: #fff;
+            color: #000;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #ddd;
+        }
+
+        body.dark-mode button:active {
+            background-color: #ccc;
+        }
+
+        body.dark-mode #appointments {
+            background-color: #2a2a2a;
+            border-color: #555;
+            color: #eee;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode #appointments p {
+            color: #ddd;
+        }
+
+        body.dark-mode #appointments strong {
+            color: #fff;
+        }
+        body.dark-mode #appointments li{
+             background-color: #333;
+             border-color: #666;
+        }
+        body.dark-mode #appointments li:hover {
+            background-color: #444;
+        }
+        .back-button {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    padding: 10px 20px;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.back-button:hover {
+    background-color: #00BFFF;
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="history.back()" class="back-button">← Back</button>
+
+    <div class="container">
+        <h2>Doctor Appointment Scheduling</h2>
+        <input type="text" id="patientName" placeholder="Patient Name">
+        <input type="text" id="doctorName" placeholder="Doctor Name">
+        <input type="date" id="appointmentDate">
+        <button id="sendAppointment">Book Appointment</button>  <div id="appointments">
+            <h3>Appointments</h3>
+            <ul></ul>
+        </div>
+    </div>
+    <script>
+        const appointments = [];
+
+        document.getElementById('sendAppointment').addEventListener('click', () => {  // Changed to sendAppointment
+            const patientName = document.getElementById('patientName').value.trim();
+            const doctorName = document.getElementById('doctorName').value.trim();
+            const appointmentDate = document.getElementById('appointmentDate').value;
+
+            if (patientName === '' || doctorName === '' || appointmentDate === '') {
+                alert('Please fill in all the fields.');
+                return;
+            }
+
+            const appointment = {
+                patientName: patientName,
+                doctorName: doctorName,
+                appointmentDate: appointmentDate,
+                status: 'pending' // Initial status is pending
+            };
+
+            // Send the appointment to the doctor (simulate with console.log and AJAX)
+            sendAppointmentToDoctor(appointment);
+
+            //  We don't add to appointments array here.  Only after the doctor confirms.
+            //  appointments.push(appointment);
+            //  updateAppointmentsList();
+            clearInputs();
+        });
+
+        function updateAppointmentsList() {
+            const appointmentsList = document.getElementById('appointments').querySelector('ul');
+            appointmentsList.innerHTML = '';
+
+            appointments.forEach((appointment, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>Patient: ${appointment.patientName}</span>
+                    <span>Doctor: ${appointment.doctorName}</span>
+                    <span>Date: ${appointment.appointmentDate}</span>
+                    <span>Status: ${appointment.status}</span>
+                     ${appointment.status === 'pending'
+                        ? `<div class="actions">
+                            <button class="cancel" data-index="${index}">Cancel</button>
+                           </div>`
+                        : ''}
+                `;
+                appointmentsList.appendChild(listItem);
+            });
+
+             // Add event listener for cancel buttons.  Do this *inside* updateAppointmentsList
+            const cancelButtons = document.querySelectorAll('.cancel');
+            cancelButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const index = button.dataset.index;
+                    appointments.splice(index, 1);
+                    updateAppointmentsList();
+                });
+            });
+        }
+
+        function clearInputs() {
+            document.getElementById('patientName').value = '';
+            document.getElementById('doctorName').value = '';
+            document.getElementById('appointmentDate').value = '';
+        }
+
+        function sendAppointmentToDoctor(appointment) {
+            // Simulate sending data to a server (the doctor's system)
+            console.log('Sending appointment to doctor:', appointment);
+            // In a real application, you would use an API (e.g., fetch) to send the data
+            // to your backend server, which would then notify the doctor and get a confirmation.
+
+            // Simulate a response from the server (doctor) -  IMPORTANT SIMULATION
+            setTimeout(() => {
+                // Simulate doctor confirming the appointment after a delay
+                appointment.status = 'confirmed';  // Update the status
+                appointments.push(appointment); // Add to the list *after* confirmation
+                updateAppointmentsList(); // Update the list to show the confirmed appointment
+                alert(`Appointment for ${appointment.patientName} with Dr. ${appointment.doctorName} on ${appointment.appointmentDate} is confirmed.`);
+            }, 2000); // Simulate a 2-second delay for the doctor's response
+        }
+    </script>
+</body>
+</html>

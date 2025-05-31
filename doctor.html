@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Panel</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #f7f7f7;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: #fff;
+    }
+
+    button {
+      padding: 6px 12px;
+      font-size: 14px;
+      border: none;
+      background-color: #2980b9;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #1f6391;
+    }
+
+    #detailedReportContainer {
+      margin-top: 60px;
+      padding: 30px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-left: 5px solid #2980b9;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      display: none;
+    }
+
+    #detailedReportContainer h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-left: 3px solid #ccc;
+      overflow-x: auto;
+    }
+
+    #downloadButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+
+    #downloadButton:hover {
+      background-color: #2c974b;
+    }
+       
+.logout-container {
+  display: flex;
+  align-items: center;
+}
+
+.logout-container button {
+  padding: 6px 6px;
+  background-color: #1e1d1d;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-left: 80px;
+}
+
+.logout-container button:hover {
+  background-color: #29c5fe;
+}     
+ </style>
+</head>
+<body>
+ <div class="logout-container">
+    <button onclick="logout()">Logout</button>
+  </div>
+  <h1>Patient Report</h1>
+
+  <table id="messagesTable">
+    <thead>
+      <tr>
+        <th>User Message</th>
+        <th>BOT-Response</th>
+        <th>Timestamp</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="detailedReportContainer">
+    <div id="detailedReport"></div>
+    <button id="downloadButton" style="display: none;">Download Report</button>
+  </div>
+
+  <script>
+    // Fetch and display message table
+    fetch("http://localhost:3000/getMessages")
+      .then(res => res.json())
+      .then(messages => {
+        const tbody = document.querySelector("#messagesTable tbody");
+        messages.forEach((msg, index) => {
+          const userMsg = msg.message || msg.userMessage;
+          const botResp = msg.response || msg.botResponse;
+          const row = `
+            <tr>
+              <td>${userMsg}</td>
+              <td>${botResp}</td>
+              <td>${new Date(msg.timestamp).toLocaleString()}</td>
+              <td><button onclick="showReport(${index})">View Report</button></td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      });
+
+   function showReport(index) {
+  fetch("http://localhost:3000/getMessages")
+    .then(res => res.json())
+    .then(messages => {
+      const reportData = messages[index];
+      const detailedReport = document.getElementById("detailedReport");
+
+      detailedReport.innerHTML = generateReport(reportData);
+
+      const container = document.getElementById("detailedReportContainer");
+      container.style.display = "block";
+      container.scrollIntoView({ behavior: "smooth" });
+
+      document.getElementById("downloadButton").style.display = "block";
+      document.getElementById("downloadButton").addEventListener("click", function() {
+        downloadReport(reportData);
+      });
+    });
+}
+
+
+ function generateReport(data) {
+  const userMsg = data.message || data.userMessage;
+  const botResp = (data.response || data.botResponse || "").replace(/\n/g, "<br>");
+
+  const summary = `
+    <h3>Report Summary</h3>
+    <p><strong>User Message:</strong> ${userMsg}</p>
+    <p><strong>Bot Response:</strong><br>${botResp}</p>
+    <p><strong>Timestamp:</strong> ${new Date(data.timestamp).toLocaleString()}</p>
+
+    <h4>Analysis</h4>
+    <ul>
+      <li><strong>Message Length:</strong> ${userMsg.length}</li>
+      <li><strong>Bot Response Length:</strong> ${(data.response || data.botResponse || "").length}</li>
+      <li><strong>Detected Topic:</strong> ${
+        userMsg.toLowerCase().includes("pulse") ? "Pulse Monitoring" :
+        userMsg.toLowerCase().includes("blood") ? "Bloodflow/Pressure" : "General Query"
+      }</li>
+    </ul>
+
+    <p><em>Note: This is an AI-generated report. Use clinical judgment when interpreting.</em></p>
+  `;
+  return summary;
+}
+
+
+
+
+    // Function to download the report as a .txt file
+  function downloadReport(data) {
+  const container = document.getElementById("detailedReport");
+  const rawHtml = container.innerHTML;
+
+  // Create a temporary element to extract text from HTML
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = rawHtml;
+
+  // Get clean text from HTML (innerText removes tags and formats line breaks nicely)
+  const cleanText = tempDiv.innerText;
+
+  // Add a professional header and footer
+  const reportContent = `
+========================================
+        PATIENT HEALTH REPORT
+========================================
+
+${cleanText}
+
+----------------------------------------
+Generated by Health Monitoring System
+Date: ${new Date().toLocaleString()}
+`.trim();
+
+  // Create and trigger the download
+  const blob = new Blob([reportContent], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `patient_report_${Date.now()}.txt`;
+  link.click();
+}
+ if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn"); // Clear session
+      window.location.href = "login.html";   // Redirect to login
+    }
+
+  </script>
+
+</body>
+</html>

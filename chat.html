@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="chat.css" />
+    <link rel="icon" href="chaticon.png" type="image/png" />
+  </head>
+
+  <body>
+    <div id="cont">
+      <div id="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="chat.html">Chat</a></li>
+          <li><a href="meal.html">Meal</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="medic.html">Medicine</a></li>
+          <!-- Dropdown -->
+          <li class="dropdown">
+            <a href="#" class="dropbtn">More</a>
+            <div class="dropdown-content">
+              <a href="symp.html">Symptom Checker</a>
+              <a href="medico.html">Medication</a>
+              <a href="mentalhealth.html">Mental Health</a>
+              <a href="appoi.html">Appointment</a>
+              <a href="doctor.html">My Reports</a>
+              <a id="symptomLink" href="https://my.docus.ai/dashboard/chat/personal/9350f77f-6497-4c51-9f0d-eb1510f05f48">AI Symptom</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="chatBot" class="chatBot">
+      <header>
+        <h2>ChatBOT</h2>
+      </header>
+      <ul class="chatbox">
+        <li class="chat-incoming chat">
+          <p>Hey! How can I assist you today?</p>
+        </li>
+        <div id="faq-section">
+          <h3>Common Questions</h3>
+          <ul id="faq-list"></ul>
+        </div>
+      </ul>
+
+      <div class="chat-input">
+        <textarea
+          rows="0"
+          cols="17"
+          placeholder="Enter a message..."
+        ></textarea>
+
+        <!-- Wrap all buttons inside a container -->
+        <div class="chat-buttons">
+          <button id="sendBTN">Send</button>
+          <button id="saveBTN">Save Chat</button>
+          <button id="clearChatBtn">Clear Chat</button>
+          <button id="generateReportButton">Gen Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <canvas id="healthChart" width="400" height="200"></canvas> -->
+    <!-- <script src="chart.js"></script> -->
+
+    <!-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+    <script src="nutrition.js"></script>
+    <script src="chat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-messaging.js"></script>
+  </body>
+</html>
