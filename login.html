@@ -102,7 +102,7 @@ if (credentials[username] && credentials[username] === password) {
   localStorage.setItem("userRole", username); // Optional: track who logged in
 
   if (username === "user") { // this code is just to display for testing for admin and user
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // for 2 users(admin and patient)
   } else if (username === "doctor") {
     window.location.href = "doctor.html";
   }
