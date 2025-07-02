@@ -1,11 +1,11 @@
 # HealthBot-IoT
-An all-in-one intelligent health monitoring system that captures real-time sensor data (temperature, pulse, etc.) and integrates it with a smart assistant chatbot. Built using HTML, CSS, JavaScript, Node.js, and Firebase, this system not only monitors vital signs but also assists users with personalized health suppor
+An all-in-one intelligent health monitoring system that captures real-time sensor data (temperature, pulse, etc.) and integrates it with a smart assistant custom chatbot. Built using HTML, CSS, JavaScript, Node.js, and Firebase, this system not only monitors vital signs but also assists users with personalized health support
  
  Key Features:
  
 📊 Sensor Integration: Collects health parameters like temperature and pulse using IoT sensors.
 
-💬 AI Chatbot: Offers assistance, suggestions, and answers to common health-related queries.
+💬 Chatbot: Offers assistance, suggestions, and answers to common health-related queries.
 
 🧾 Health Reports: Automatically generates health reports based on live and historical data.
 
