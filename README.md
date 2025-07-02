@@ -41,7 +41,7 @@ Hardware: IoT sensors with ESP8266 (for temperature and pulse monitoring)
 
 
 
- For any queries or structured code feel free to mail me at mohammedanees0606@gmail.com.
+ For any queries or for structured code feel free to mail me at mohammedanees0606@gmail.com.
 
 
 
